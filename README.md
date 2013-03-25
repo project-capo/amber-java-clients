@@ -24,6 +24,8 @@ W obecnej wersji dostępna jest tylko biblioteka do obsługi sterownika silnikó
 
 ## Sterownik silników Roboclaw
 
+Przykładowy eclipsowy projekt można znaleźć w katalogu [examples/roboclaw_example](examples/roboclaw_example).
+
 Poniżej przykład wykorzystania biblioteki obsługi sterownika silników. Program rozpędza powoli silniki, a potem je zatrzymuje. Dla przejrzystości została pominięta obsługa wyjątków.
 
 ```java
