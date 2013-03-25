@@ -26,41 +26,53 @@
     </dependency>
   </dependencies>
   <build>
-	  <plugins>
-	    <plugin>
-			<groupId>com.google.protobuf.tools</groupId>
-		   	<artifactId>maven-protoc-plugin</artifactId>
-		     <version>0.1.10</version>
-		    <configuration>
-		        <protocExecutable>protoc</protocExecutable>
-		        <protoSourceRoot>${project.basedir}/src/main/resources/</protoSourceRoot>
-		        <additionalProtoPathElements>
-	            	<additionalProtoPathElement>../amber-common/src/main/resources/</additionalProtoPathElement>
-        		</additionalProtoPathElements>
-		        <languageSpecifications>
-		            <LanguageSpecification>
-		               <language>JAVA</language>
-		               <outputDirectory>
-		                    ${project.basedir}/target/generated-sources/java
-		               </outputDirectory>
-		            </LanguageSpecification>
-		        </languageSpecifications>                     
-		    </configuration>
-		    <executions>
-		        <execution>
-		            <goals>
-		                <goal>compile</goal>
-		            </goals>
-		        </execution>
-		    </executions>
-		</plugin>
-	  </plugins>
-  </build>
+   <plugins>
+     <plugin>
+       <groupId>com.google.protobuf.tools</groupId>
+       <artifactId>maven-protoc-plugin</artifactId>
+       <version>0.1.10</version>
+       <configuration>
+        <protocExecutable>protoc</protocExecutable>
+        <protoSourceRoot>${project.basedir}/src/main/resources/</protoSourceRoot>
+        <additionalProtoPathElements>
+          <additionalProtoPathElement>../amber-common/src/main/resources/</additionalProtoPathElement>
+        </additionalProtoPathElements>
+        <languageSpecifications>
+          <LanguageSpecification>
+           <language>JAVA</language>
+           <outputDirectory>
+            ${project.basedir}/target/generated-sources/java
+          </outputDirectory>
+        </LanguageSpecification>
+      </languageSpecifications>                     
+    </configuration>
+    <executions>
+      <execution>
+        <goals>
+          <goal>compile</goal>
+        </goals>
+      </execution>
+    </executions>
+  </plugin>
+  <plugin>
+    <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-source-plugin</artifactId>
+    <executions>
+      <execution>
+        <id>attach-sources</id>
+        <goals>
+          <goal>jar</goal>
+        </goals>
+      </execution>
+    </executions>
+  </plugin>
+</plugins>
+</build>
 
-  <parent>
-  	<groupId>pl.edu.agh.amber</groupId>
-  	<artifactId>amber</artifactId>
-  	<version>1.0-SNAPSHOT</version>
-  </parent>
+<parent>
+ <groupId>pl.edu.agh.amber</groupId>
+ <artifactId>amber</artifactId>
+ <version>1.0-SNAPSHOT</version>
+</parent>
 </project>
 
