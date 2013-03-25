@@ -3,6 +3,20 @@ amber-java-clients
 
 To repozytorium zawiera kod bibliotek klienckich używanych do sterowania robota mobilnego pracującego pod kontrolą platformy [Amber](https://github.com/kgadek/Amber).
 
+## Gotowe paczki
+
+Skompilowane pliki JAR wraz z przykładami można znaleźć tu. TODO...
+
+
+## Kompilacja
+
+Gdyby jednak naszła kogoś ochota na samodzielną kompilacją to do zbudowania pliku JAR z bibliotekami wymagane są:
+- maven3
+- protoc - kompilator plików Protocol Buffer, do pobrania [stąd](https://code.google.com/p/protobuf/)
+
+Po sklonowaniu repozytorium należy wydać polecenie `mvn package` w głównym katalogu. Archiwa JAR pojawią się w katalogach `target/` poszczególnych projektów.
+
+
 ## Obsługiwane urządzenia
 
 W obecnej wersji dostępna jest tylko biblioteka do obsługi sterownika silników Roboclaw. Zawiera wyłącznie komendę sterowania prędkością obrotową silników. 
