@@ -40,42 +40,21 @@ public class RoboclawProxy extends AmberProxy {
 	@Override
 	public void handleDataMsg(DriverHdr header, DriverMsg message) {
 		
-		
 	}
 	
-	private MotorsQuadCommand buildMotorsCommand(MotorsCommand mc) {
-		
-		if (mc == null) {
-			return null;
-		}
-		
-		MotorsQuadCommand.Builder commandBuilder = MotorsQuadCommand.newBuilder();
-
-		commandBuilder.setFrontLeftSpeed(mc.getFrontLeftSpeed());
-		commandBuilder.setFrontRightSpeed(mc.getFrontRightSpeed());
-		commandBuilder.setRearLeftSpeed(mc.getRearLeftSpeed());
-		commandBuilder.setRearRightSpeed(mc.getRearRightSpeed());
-
-		return commandBuilder.build();
-	}
-	
-	public void sendMotorsCommand(MotorsCommand mc) throws IOException {
-
-		if (mc == null) {
-			throw new IllegalArgumentException("MotorsCommand cannot be null");
-		}
-		
+	public void sendMotorsCommand(int frontLeftSpeed, int frontRightSpeed, int rearLeftSpeed, int rearRightSpeed) throws IOException {
 		DriverMsg.Builder driverMsgBuilder = DriverMsg.newBuilder();
 		driverMsgBuilder.setType(DriverMsg.MsgType.DATA);
 		
-		MotorsQuadCommand motorsCommand;
-		
-		motorsCommand = buildMotorsCommand(mc);
-		if (motorsCommand == null) {
-			throw new RuntimeException("Error in serializing MotorsCommand");
-		}
-		
-		driverMsgBuilder.setExtension(RoboclawProto.motorsCommand, motorsCommand);
+		MotorsQuadCommand.Builder commandBuilder = MotorsQuadCommand.newBuilder();
+
+		commandBuilder.setFrontLeftSpeed(frontLeftSpeed);
+		commandBuilder.setFrontRightSpeed(frontRightSpeed);
+		commandBuilder.setRearLeftSpeed(rearLeftSpeed);
+		commandBuilder.setRearRightSpeed(rearRightSpeed);
+
+		MotorsQuadCommand motorsQuadCommand = commandBuilder.build();
+		driverMsgBuilder.setExtension(RoboclawProto.motorsCommand, motorsQuadCommand);
 		driverMsgBuilder.setSynNum(getNextSynNum());
 		
 		amberClient.sendMessage(buildHeader(), driverMsgBuilder.build());
