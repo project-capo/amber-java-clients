@@ -26,11 +26,12 @@
     </dependency>
   </dependencies>
   <build>
+  
+
   <plugins>
 		<plugin>
 			<groupId>com.google.protobuf.tools</groupId>
 	    	<artifactId>maven-protoc-plugin</artifactId>
-		    <version>0.1.12-SNAPSHOT</version>
 		    <configuration>
 		        <protocExecutable>protoc</protocExecutable>
 		        <protoSourceRoot>${project.basedir}/src/main/resources/</protoSourceRoot>
