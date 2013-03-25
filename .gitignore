@@ -4,3 +4,34 @@
 *.jar
 *.war
 *.ear
+
+bin/
+target/
+tmp/
+
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+.settings/
+.loadpath
+.checkstyle
+
+# External tool builders
+.externalToolBuilders/
+
+# Locally stored "Eclipse launch configurations"
+*.launch
+
+# CDT-specific
+.cproject
+
+# PDT-specific
+.buildpath
+
+# Windows image file caches
+Thumbs.db
+
+# Folder config file
+Desktop.ini
