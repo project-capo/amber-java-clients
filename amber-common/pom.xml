@@ -34,15 +34,10 @@
        <configuration>
         <protocExecutable>protoc</protocExecutable>
         <protoSourceRoot>${project.basedir}/src/main/resources/</protoSourceRoot>
-        <languageSpecifications>
-          <LanguageSpecification>
-           <language>JAVA</language>
-           <outputDirectory>
+         <outputDirectory>
             ${project.basedir}/target/generated-sources/java
           </outputDirectory>
-        </LanguageSpecification>
-      </languageSpecifications>                     
-    </configuration>
+      </configuration>
     <executions>
       <execution>
         <goals>

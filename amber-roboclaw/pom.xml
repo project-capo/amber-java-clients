@@ -37,15 +37,10 @@
         <additionalProtoPathElements>
           <additionalProtoPathElement>../amber-common/src/main/resources/</additionalProtoPathElement>
         </additionalProtoPathElements>
-        <languageSpecifications>
-          <LanguageSpecification>
-           <language>JAVA</language>
-           <outputDirectory>
-            ${project.basedir}/target/generated-sources/java
-          </outputDirectory>
-        </LanguageSpecification>
-      </languageSpecifications>                     
-    </configuration>
+        <outputDirectory>
+          ${project.basedir}/target/generated-sources/java
+        </outputDirectory>               
+      </configuration>
     <executions>
       <execution>
         <goals>
