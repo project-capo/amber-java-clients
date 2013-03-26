@@ -5,7 +5,7 @@ To repozytorium zawiera kod bibliotek klienckich używanych do sterowania robota
 
 ## Gotowe paczki
 
-Skompilowane pliki JAR wraz z przykładami można znaleźć tu. TODO...
+Skompilowane pliki JAR wraz z przykładami można pobrać [stąd](http://amber.octanum.info/jars/).
 
 
 ## Kompilacja
@@ -19,10 +19,12 @@ Po sklonowaniu repozytorium należy wydać polecenie `mvn package` w głównym k
 
 ## Obsługiwane urządzenia
 
-W obecnej wersji dostępna jest tylko biblioteka do obsługi sterownika silników Roboclaw. Zawiera wyłącznie komendę sterowania prędkością obrotową silników. 
-
+- Roboclaw - wyłącznie sterowanie prędkością obrotową silników,
+- 9DOF - wersja eksperymentalna
 
 ## Sterownik silników Roboclaw
+
+Przykładowy eclipsowy projekt można znaleźć w katalogu [examples/roboclaw_example](examples/roboclaw_example).
 
 Poniżej przykład wykorzystania biblioteki obsługi sterownika silników. Program rozpędza powoli silniki, a potem je zatrzymuje. Dla przejrzystości została pominięta obsługa wyjątków.
 
