@@ -5,7 +5,7 @@ To repozytorium zawiera kod bibliotek klienckich używanych do sterowania robota
 
 ## Gotowe paczki
 
-Skompilowane pliki JAR wraz z przykładami można znaleźć tu. TODO...
+Skompilowane pliki JAR wraz z przykładami można pobrać [stąd](http://amber.octanum.info/jars/).
 
 
 ## Kompilacja
