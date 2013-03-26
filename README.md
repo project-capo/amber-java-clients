@@ -19,8 +19,8 @@ Po sklonowaniu repozytorium należy wydać polecenie `mvn package` w głównym k
 
 ## Obsługiwane urządzenia
 
-W obecnej wersji dostępna jest tylko biblioteka do obsługi sterownika silników Roboclaw. Zawiera wyłącznie komendę sterowania prędkością obrotową silników. 
-
+- Roboclaw - wyłącznie sterowanie prędkością obrotową silników,
+- 9DOF - wersja eksperymentalna
 
 ## Sterownik silników Roboclaw
 
