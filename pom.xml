@@ -11,12 +11,13 @@
   <modules>
   	<module>amber-common</module>
   	<module>amber-roboclaw</module>
+    <module>amber-ninedof</module>
   </modules>
 
   <pluginRepositories>
     <pluginRepository>
       <id>dtrott</id>
-      <url>http://maven.davidtrott.com/repository</url>
+      <url>http://maven.davidtrott.com/pluginRepository</url>
     </pluginRepository>
   </pluginRepositories>  
 
