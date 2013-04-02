@@ -13,7 +13,8 @@ public class RoboclawExample {
 
 		AmberClient client;
 		try {
-			client = new AmberClient("192.168.1.50", 26233);
+			client = new AmberClient("192.168.2.201", 26233);
+			
 		} catch (IOException e) {
 			System.out.println("Unable to connect to robot: " + e);
 			return;
@@ -21,10 +22,12 @@ public class RoboclawExample {
 		
 		RoboclawProxy roboclawProxy = new RoboclawProxy(client, 0);
 				
+		final int speed = 1000;
+		
 		try {
-			roboclawProxy.sendMotorsCommand(1000, 1000, 2000, 2000);
+			roboclawProxy.sendMotorsCommand(speed, -speed, speed, -speed);
 			
-			Thread.sleep(1000);
+			Thread.sleep(10000);
 			
 		} catch (IOException e) {
 			System.out.println("Error in sending a command: " + e);
