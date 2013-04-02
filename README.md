@@ -20,7 +20,7 @@ Po sklonowaniu repozytorium należy wydać polecenie `mvn package` w głównym k
 ## Obsługiwane urządzenia
 
 - Roboclaw - wyłącznie sterowanie prędkością obrotową silników,
-- 9DOF - wersja eksperymentalna
+- 9DOF - odczyt wartości ze wszystkich trzech sensorów.
 
 ## Sterownik silników Roboclaw
 
@@ -45,3 +45,48 @@ roboclawProxy.stopMotors();
 
 client.terminate();
 ```
+
+## Sensora 9DOF (akcelerometr, żyroskop i magnetometr)
+
+Przykładowy eclipsowy projekt można znaleźć w katalogu [examples/ninedof_example](examples/ninedof_example).
+
+Poniżej przykład wykorzystania biblioteki obsługi sensora 9DOF. Program dokonuje odczytu wszystkich wartości najpierw sposób synchroniczny, a potem cykliczny, za pomocą listenerów. Dla przejrzystości została pominięta obsługa wyjątków.
+
+```java
+// Połącz z robotem
+AmberClient client = new AmberClient("192.168.1.50", 26233);
+NinedofProxy ninedofProxy = new NinedofProxy(client, 0);
+
+// Odczyt synchroniczny
+for (int i = 0; i < 10; i++) {
+
+  // Pobieranie danych; w parametrach wybór sensorów, z których żądane są dane 
+  NinedofData ninedofData = ninedofProxy.getAxesData(true, true, true);
+  
+  // Poczekaj na nadejście danych
+  ninedofData.waitAvailable();
+				
+  // Wszystkie otrzymane dane są w strukturze ninedofData, poniżej wypisanie jednej wartości
+  System.out.println(ninedofData.getAccel().xAxis)
+    
+  Thread.sleep(10);
+}
+
+// Odczyt w sposób cykliczny, z częstotliwością 10ms
+
+// Rejestracja listera; w parametrach częstotliwość i wybór sensorów, z których żądane są dane
+ninedofProxy.registerNinedofDataListener(10, true, true, true, new CyclicDataListener<NinedofData>() {
+  			
+  	@Override
+  	public void handle(NinedofData ninedofData) {
+    
+      // Wszystkie otrzymane dane są w strukturze ninedofData, poniżej wypisanie jednej wartości
+      System.out.println(ninedofData.getAccel().xAxis)
+            
+  	}
+  });
+			
+
+client.terminate();
+```
+
