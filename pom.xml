@@ -17,7 +17,7 @@
   <pluginRepositories>
     <pluginRepository>
       <id>dtrott</id>
-      <url>http://maven.davidtrott.com/pluginRepository</url>
+      <url>http://maven.davidtrott.com/repository</url>
     </pluginRepository>
   </pluginRepositories>  
 
