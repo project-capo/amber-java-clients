@@ -7,6 +7,7 @@ import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.apache.commons.collections.keyvalue.MultiKey;
@@ -22,6 +23,8 @@ public class AmberClient implements Runnable {
 	private final DatagramSocket socket;
 	private final InetAddress address;
 	private final int port;
+	
+	private boolean terminated = false;
 
 	private final static int RECEIVING_BUFFER_SIZE = 4096;
 
@@ -39,6 +42,11 @@ public class AmberClient implements Runnable {
 		this.socket = new DatagramSocket();
 		this.address = InetAddress.getByName(hostname);
 		this.port = port;
+
+		logger.setLevel(Level.INFO);
+		
+		logger.info(String.format(
+				"Starting AmberClient, remote address: %s, port: %d.", hostname, port));
 
 		receivingThread = new Thread(this);
 		receivingThread.start();
@@ -62,6 +70,7 @@ public class AmberClient implements Runnable {
 
 		while (true) {
 			try {
+				logger.finest("Entering socket.receive().");			
 				socket.receive(packet);
 
 				byte[] packetBytes = packet.getData();
@@ -87,7 +96,7 @@ public class AmberClient implements Runnable {
 							.getDeviceType(), header.getDeviceID()));
 
 					if (clientProxy == null) {
-						logger.fine(String.format(
+						logger.warning(String.format(
 								"Client proxy with given device type (%d) and ID (%d) not found, "
 										+ "ignoring message.",
 								header.getDeviceType(), header.getDeviceID()));
@@ -100,16 +109,16 @@ public class AmberClient implements Runnable {
 				}
 
 			} catch (InvalidProtocolBufferException ex) {
-				logger.fine("Error in parsing the message, ignoring.");
+				logger.warning("Error in parsing the message, ignoring.");
 
 			} catch (IOException e) {
 
 				if (socket.isClosed()) {
-					logger.info("Socket closed, exiting.");
+					logger.fine("Socket closed, exiting.");
 					return;
 				}
 
-				logger.fine("Error in receiving packet: " + e);
+				logger.warning("Error in receiving packet: " + e);
 			}
 		}
 	}
@@ -118,7 +127,7 @@ public class AmberClient implements Runnable {
 
 		switch (message.getType()) {
 		case DATA:
-			logger.fine("DATA message came, but device details not set, ignoring.");
+			logger.warning("DATA message came, but device details not set, ignoring.");
 			break;
 
 		case PING:
@@ -132,11 +141,11 @@ public class AmberClient implements Runnable {
 			break;
 
 		case DRIVER_DIED:
-			logger.fine("DRIVER_DIED message came, but device details not set, ignoring.");
+			logger.warning("DRIVER_DIED message came, but device details not set, ignoring.");
 			break;
 
 		default:
-			logger.fine(String.format("Unexpected message came: %s, ignoring.",
+			logger.warning(String.format("Unexpected message came: %s, ignoring.",
 					message.getType().toString()));
 		}
 
@@ -175,7 +184,7 @@ public class AmberClient implements Runnable {
 			break;
 
 		default:
-			logger.fine(String.format(
+			logger.warning(String.format(
 					"Unexpected message came %s for (%d: %d), ignoring.",
 					message.getType().toString(), clientProxy.deviceType,
 					clientProxy.deviceID));
@@ -221,7 +230,14 @@ public class AmberClient implements Runnable {
 
 	}
 
-	public void terminate() {
+	public void terminate() {		
+		if (terminated) {
+			return;
+		}
+		
+		terminated = true;
+		
+		logger.info("Terminating.");
 		terminateProxies();
 		socket.close();
 		receivingThread.interrupt();

@@ -23,6 +23,8 @@ public class RoboclawProxy extends AmberProxy {
 	public RoboclawProxy(AmberClient amberClient, int deviceID) {
 		super(DEVICE_TYPE, deviceID, amberClient, Logger.getLogger("RoboclawProxy"));
 		
+		logger.info("Starting and registering RoboclawProxy.");
+		
 		extensionRegistry = ExtensionRegistry.newInstance();
 		RoboclawProto.registerAllExtensions(extensionRegistry);	
 	}
@@ -43,6 +45,9 @@ public class RoboclawProxy extends AmberProxy {
 	}
 	
 	public void sendMotorsCommand(int frontLeftSpeed, int frontRightSpeed, int rearLeftSpeed, int rearRightSpeed) throws IOException {
+		logger.fine(String.format("Sending MotorsCommand: %d %d %d %d.", 
+				frontLeftSpeed, frontRightSpeed, rearLeftSpeed, rearRightSpeed));
+		
 		DriverMsg.Builder driverMsgBuilder = DriverMsg.newBuilder();
 		driverMsgBuilder.setType(DriverMsg.MsgType.DATA);
 		

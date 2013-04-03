@@ -1,6 +1,7 @@
 package pl.edu.agh.amber.common;
 
 import java.io.IOException;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import pl.edu.agh.amber.common.proto.CommonProto.DriverHdr;
@@ -22,6 +23,8 @@ public abstract class AmberProxy {
 		this.amberClient = amberClient;
 		this.logger = logger;
 		
+		logger.setLevel(Level.INFO);
+	
 		amberClient.registerClient(deviceType, deviceID, this);
 	}
 	
@@ -41,7 +44,7 @@ public abstract class AmberProxy {
 	}
 	
 	public void terminateProxy() {
-		logger.info("Sending terminate message");
+		logger.info("Terminating proxy.");
 
 		DriverMsg.Builder driverMsgBuilder = DriverMsg.newBuilder();
 		driverMsgBuilder.setType(DriverMsg.MsgType.CLIENT_DIED);
@@ -49,7 +52,7 @@ public abstract class AmberProxy {
 		try {
 			amberClient.sendMessage(buildHeader(), driverMsgBuilder.build());
 		} catch (IOException e) {
-			logger.severe("Error in sending terminate message");
+			logger.warning("Error in sending terminate message");
 		}
 	}
 	

@@ -33,6 +33,8 @@ public class NinedofProxy extends AmberProxy {
 	public NinedofProxy(AmberClient amberClient, int deviceID) {
 		super(DEVICE_TYPE, deviceID, amberClient, Logger
 				.getLogger("NinedofProxy"));
+		
+		logger.info("Starting and registering NinedofProxy.");
 
 		extensionRegistry = ExtensionRegistry.newInstance();
 		NinedofProto.registerAllExtensions(extensionRegistry);
@@ -60,7 +62,6 @@ public class NinedofProxy extends AmberProxy {
 
 	@Override
 	public void handleDataMsg(DriverHdr header, DriverMsg message) {
-
 		if (!message.hasAckNum() || message.getAckNum() == 0) {
 
 			NinedofData ninedofData = new NinedofData();
@@ -90,6 +91,9 @@ public class NinedofProxy extends AmberProxy {
 	public void registerNinedofDataListener(int freq, boolean accel,
 			boolean gyro, boolean magnet,
 			CyclicDataListener<NinedofData> listener) throws IOException {
+		
+		logger.fine(String.format("Registering NinedofDataListener, freq: %d, a:%s, g:%s, m:%s.", 
+				freq, accel, gyro, magnet));
 
 		DriverMsg driverMsg = buildSubscribeActionMsg(freq, accel, gyro, magnet);
 
@@ -150,6 +154,10 @@ public class NinedofProxy extends AmberProxy {
 			throws IOException {
 		int synNum = getNextSynNum();
 
+		logger.fine(String.format("Pulling NinedofData, a:%s, g:%s, m:%s.", 
+				accel, gyro, magnet));
+
+		
 		DriverMsg dataRequestMsg = buildDataRequestMsg(synNum, accel, gyro,
 				magnet);
 
