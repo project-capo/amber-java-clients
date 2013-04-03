@@ -48,6 +48,11 @@ client.terminate();
 
 ## Sensora 9DOF (akcelerometr, żyroskop i magnetometr)
 
+Wartości podawane są w jednostkach:
+- akcelerometr - mG (tysięczne części przyspieszenia ziemskiego)
+- żyroskop - stopnie/minutę
+- magnetometr - mGs (tysięczne części Gausa)
+
 Przykładowy eclipsowy projekt można znaleźć w katalogu [examples/ninedof_example](examples/ninedof_example).
 
 Poniżej przykład wykorzystania biblioteki obsługi sensora 9DOF. Program dokonuje odczytu wszystkich wartości najpierw sposób synchroniczny, a potem cykliczny, za pomocą listenerów. Dla przejrzystości została pominięta obsługa wyjątków.
