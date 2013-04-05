@@ -34,63 +34,60 @@
        <configuration>
         <protocExecutable>protoc</protocExecutable>
         <protoSourceRoot>${project.basedir}/src/main/resources/</protoSourceRoot>
-         <outputDirectory>
-            ${project.basedir}/target/generated-sources/java
-          </outputDirectory>
+        <outputDirectory>
+          ${project.basedir}/target/generated-sources/java
+        </outputDirectory>
       </configuration>
-    <executions>
-      <execution>
-        <goals>
-          <goal>compile</goal>
-        </goals>
-      </execution>
-    </executions>
-  </plugin>
+      <executions>
+        <execution>
+          <goals>
+            <goal>compile</goal>
+          </goals>
+        </execution>
+      </executions>
+    </plugin>
 
-  <plugin>
-    <artifactId>maven-assembly-plugin</artifactId>
-    <executions>
-      <execution>
-        <phase>package</phase>
-        <goals>
-          <goal>single</goal>
-        </goals>
-      </execution>
-    </executions>
-    <configuration>
-      <descriptorRefs>
-        <descriptorRef>jar-with-dependencies</descriptorRef>
-      </descriptorRefs>
-      <appendAssemblyId>false</appendAssemblyId>
-    </configuration>
-  </plugin>
-  <plugin>
-    <groupId>org.apache.maven.plugins</groupId>
-    <artifactId>maven-source-plugin</artifactId>
-    <version>2.2.1</version>
-    <executions>
-      <execution>
-        <id>attach-sources</id>
-        <goals>
-          <goal>jar</goal>
-        </goals>
-      </execution>
-    </executions>
-  </plugin>
-  <plugin>
-    <groupId>org.apache.maven.plugins</groupId>
-    <artifactId>maven-source-plugin</artifactId>
-    <executions>
-      <execution>
-        <id>attach-sources</id>
-        <goals>
-          <goal>jar</goal>
-        </goals>
-      </execution>
-    </executions>
-  </plugin>
+    <plugin>
+      <artifactId>maven-assembly-plugin</artifactId>
+      <executions>
+        <execution>
+          <phase>package</phase>
+          <goals>
+            <goal>single</goal>
+          </goals>
+        </execution>
+      </executions>
+      <configuration>
+        <descriptorRefs>
+          <descriptorRef>jar-with-dependencies</descriptorRef>
+        </descriptorRefs>
+        <appendAssemblyId>false</appendAssemblyId>
+      </configuration>
+    </plugin>
+    <plugin>
+      <groupId>org.apache.maven.plugins</groupId>
+      <artifactId>maven-source-plugin</artifactId>
+      <version>2.2.1</version>
+      <executions>
+        <execution>
+          <id>attach-sources</id>
+          <goals>
+            <goal>jar</goal>
+          </goals>
+        </execution>
+      </executions>
+    </plugin>
+    <plugin>
+      <groupId>org.apache.maven.plugins</groupId>
+      <artifactId>maven-compiler-plugin</artifactId>
+      <version>3.0</version>
+      <configuration>
+        <source>1.6</source>
+        <target>1.6</target>
+      </configuration>
+    </plugin>
 
-</plugins>
+  </plugins>
 </build>
 <parent>
  <groupId>pl.edu.agh.amber</groupId>
