@@ -2,6 +2,12 @@ package pl.edu.agh.amber.ninedof;
 
 import pl.edu.agh.amber.common.FutureObject;
 
+/**
+ * Structure that hold 9DOF sensor's data.
+ * 
+ * @author Michał Konarski <konarski@student.agh.edu.pl>
+ *
+ */
 public class NinedofData extends FutureObject {
 	
 	public static class AxesData {

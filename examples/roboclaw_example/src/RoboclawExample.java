@@ -4,6 +4,12 @@ import pl.edu.agh.amber.common.AmberClient;
 import pl.edu.agh.amber.roboclaw.MotorsCurrentSpeed;
 import pl.edu.agh.amber.roboclaw.RoboclawProxy;
 
+/**
+ * RoboClaw proxy example. Sends motors command and gets current motor's speed.
+ * 
+ * @author Michał Konarski <konarski@student.agh.edu.pl>
+ * 
+ */
 public class RoboclawExample {
 
 	public static void main(String[] args) {
@@ -28,12 +34,12 @@ public class RoboclawExample {
 			roboclawProxy.sendMotorsCommand(speed, speed, speed, speed);
 			MotorsCurrentSpeed mcs = roboclawProxy.getCurrentMotorsSpeed();
 			mcs.waitAvailable();
-			
+
 			System.out.println(String.format(
-				"Motors current speed: fl: %d, fr: %d, rl: %d, rr: %d",				
-				mcs.getFrontLeftSpeed(), mcs.getFrontRightSpeed(),
-				mcs.getRearLeftSpeed(), mcs.getRearRightSpeed()));
-				
+					"Motors current speed: fl: %d, fr: %d, rl: %d, rr: %d",
+					mcs.getFrontLeftSpeed(), mcs.getFrontRightSpeed(),
+					mcs.getRearLeftSpeed(), mcs.getRearRightSpeed()));
+
 		} catch (IOException e) {
 			System.out.println("Error in sending a command: " + e);
 		} catch (Exception e) {

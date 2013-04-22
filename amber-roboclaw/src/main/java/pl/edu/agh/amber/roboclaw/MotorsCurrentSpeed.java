@@ -2,6 +2,12 @@ package pl.edu.agh.amber.roboclaw;
 
 import pl.edu.agh.amber.common.FutureObject;
 
+/**
+ * Structure that holds robot's motors current speed values.
+ * 
+ * @author Michał Konarski <konarski@student.agh.edu.pl>
+ *
+ */
 public class MotorsCurrentSpeed extends FutureObject {
 
 	private int frontLeftSpeed;
