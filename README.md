@@ -24,7 +24,9 @@ Po sklonowaniu repozytorium należy wydać polecenie `mvn package` w głównym k
 
 ## Schemat systemu
 
-Na robotach działa automatycznie uruchamiany nasłuchujący proces mediatora z którym łączy się obiekt klasy `AmberClient`. Wraz z nim uruchomione są sterowniki, z którymi komunikują się odpowiednie proxy urządzeń. Program kliencki wykorzystujący umieszczone tu biblioteki klienckie w javie może zostać uruchomiony bezpośrednio na robocie lub zdalnie, na innej maszynie podłączonej do sieci w laboratorium robotów. Aby uzyskać dostęp do systemu na robocie należy skorzystać z protokołu ssh. 
+Na robotach działa automatycznie uruchamiany nasłuchujący proces mediatora z którym łączy się obiekt klasy `AmberClient`. Wraz z nim uruchomione są sterowniki, z którymi komunikują się odpowiednie proxy urządzeń. 
+
+Program kliencki wykorzystujący umieszczone tu biblioteki klienckie w javie może zostać uruchomiony bezpośrednio na robocie lub zdalnie, na innej maszynie podłączonej do sieci w laboratorium robotów. Aby uzyskać dostęp do systemu na robocie należy skorzystać z protokołu ssh. 
 
 
 ## Sterownik silników Roboclaw
