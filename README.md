@@ -22,6 +22,11 @@ Po sklonowaniu repozytorium należy wydać polecenie `mvn package` w głównym k
 - Roboclaw - wyłącznie sterowanie prędkością obrotową silników,
 - 9DOF - odczyt wartości ze wszystkich trzech sensorów.
 
+## Schemat systemu
+
+Na robotach działa automatycznie uruchamiany nasłuchujący proces mediatora z którym łączy się obiekt klasy `AmberClient`. Wraz z nim uruchomione są sterowniki, z którymi komunikują się odpowiednie proxy urządzeń. Program kliencki wykorzystujący umieszczone tu biblioteki klienckie w javie może zostać uruchomiony bezpośrednio na robocie lub zdalnie, na innej maszynie podłączonej do sieci w laboratorium robotów. Aby uzyskać dostęp do systemu na robocie należy skorzystać z protokołu ssh. 
+
+
 ## Sterownik silników Roboclaw
 
 Przykładowy eclipsowy projekt można znaleźć w katalogu [examples/roboclaw_example](examples/roboclaw_example).
