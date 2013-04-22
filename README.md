@@ -40,6 +40,15 @@ for (int i = 1; i <= 10; i++) {
   Thread.sleep(500);
 }
 
+// Odczytaj aktualną prędkość kół
+MotorsCurrentSpeed mcs = roboclawProxy.getCurrentMotorsSpeed();
+mcs.waitAvailable();
+			
+System.out.println(String.format(
+	"Motors current speed: fl: %d, fr: %d, rl: %d, rr: %d",				
+	mcs.getFrontLeftSpeed(), mcs.getFrontRightSpeed(),
+	mcs.getRearLeftSpeed(), mcs.getRearRightSpeed()));
+
 // Zatrzymaj silniki
 roboclawProxy.stopMotors();
 
