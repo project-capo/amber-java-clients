@@ -1,7 +1,7 @@
 amber-java-clients
 ==================
 
-[![Build Status](https://travis-ci.org/project-capo/amber-java-clients.svg)](https://travis-ci.org/project-capo/amber-java-clients)
+[![Build Status](https://travis-ci.org/project-capo/amber-java-clients.svg?branch=master)](https://travis-ci.org/project-capo/amber-java-clients)
 
 This repository contains library used to managing drivers located on robot controlled by Amber mediator.
 
