@@ -1,113 +1,137 @@
 amber-java-clients
 ==================
 
-To repozytorium zawiera kod bibliotek klienckich używanych do sterowania robota mobilnego pracującego pod kontrolą platformy [Amber](https://github.com/kgadek/Amber).
+[![Build Status](https://travis-ci.org/project-capo/amber-java-clients.svg)](https://travis-ci.org/project-capo/amber-java-clients)
 
-## Gotowe paczki
+This repository contains library used to managing drivers located on robot controlled by Amber mediator.
 
-Skompilowane pliki JAR wraz z przykładami można pobrać [stąd](http://amber.octanum.info/jars/).
+Supported devices
+-----------------
 
+* Hokuyo by `amber-java-hokuyo` - laser range scanner
+* 9DOF by `amber-java-ninedof` - sensor stick with accelerometer, magnetometer and gyro
+* Roboclaw by `amber-java-roboclaw` - motor controllers
 
-## Kompilacja
+Requirements
+------------
 
-Gdyby jednak naszła kogoś ochota na samodzielną kompilacją to do zbudowania pliku JAR z bibliotekami wymagane są:
-- maven3
-- protoc - kompilator plików Protocol Buffer, do pobrania [stąd](https://code.google.com/p/protobuf/)
+* `jdk7` with `maven`
+* `protobuf` and `protoc` from `protobuf-compiler`
 
-Po sklonowaniu repozytorium należy wydać polecenie `mvn package` w głównym katalogu. Archiwa JAR pojawią się w katalogach `target/` poszczególnych projektów.
+How to deploy
+-------------
 
+* Clone this project.
+* Import project to your favorite IDE.
 
-## Obsługiwane urządzenia
+If you want to use packages, run `mvn install` ar `mvn package` inside project.
 
-- Roboclaw - wyłącznie sterowanie prędkością obrotową silników,
-- 9DOF - odczyt wartości ze wszystkich trzech sensorów.
+If project cannot be build in IDE due to import errors, check if `target/generated-sources/java` is selected as *source* in every module (if exists).
 
-## Schemat systemu
+How to use (maven)
+------------------
 
-Na robotach działa automatycznie uruchamiany nasłuchujący proces mediatora z którym łączy się obiekt klasy `AmberClient`. Wraz z nim uruchomione są sterowniki, z którymi komunikują się odpowiednie proxy urządzeń. 
+Simply. Add following lines to your projects `pom.xml`:
 
-Program kliencki wykorzystujący umieszczone tu biblioteki klienckie w javie może zostać uruchomiony bezpośrednio na robocie lub zdalnie, na innej maszynie podłączonej do sieci w laboratorium robotów. Aby uzyskać dostęp do systemu na robocie należy skorzystać z protokołu ssh. 
+    <repositories>
+        <repository>
+            <id>amber-java-clients-mvn-repo</id>
+            <url>https://github.com/project-capo/amber-java-clients/raw/mvn-repo</url>
+        </repository>
+    </repositories>
 
+Next, add following selected dependencies:
 
-## Sterownik silników Roboclaw
+    <dependencies>
+        <dependency>
+            <groupId>pl.edu.agh.amber.common</groupId>
+            <artifactId>amber-java-common</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>pl.edu.agh.amber.hokuyo</groupId>
+            <artifactId>amber-java-hokuyo</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>pl.edu.agh.amber.ninedof</groupId>
+            <artifactId>amber-java-ninedof</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>pl.edu.agh.amber.roboclaw</groupId>
+            <artifactId>amber-java-roboclaw</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
 
-Przykładowy eclipsowy projekt można znaleźć w katalogu [examples/roboclaw_example](examples/roboclaw_example).
+How to use (jar)
+----------------
 
-Poniżej przykład wykorzystania biblioteki obsługi sterownika silników. Program rozpędza powoli silniki, a potem je zatrzymuje. Dla przejrzystości została pominięta obsługa wyjątków.
+You can download jars from maven repository. You **need** to use *common part* with other jars. Find the **latest** version in places:
 
-```java
-// Połącz z robotem
-AmberClient client = new AmberClient("192.168.1.50", 26233);
-RoboclawProxy roboclawProxy = new RoboclawProxy(client, 0);
+ * [Common part](https://github.com/project-capo/amber-java-clients/tree/mvn-repo/pl/edu/agh/amber/common/amber-java-common/1.0-SNAPSHOT "Common part") *required*
+ * [Hokuyo client](https://github.com/project-capo/amber-java-clients/tree/mvn-repo/pl/edu/agh/amber/hokuyo/amber-java-hokuyo/1.0-SNAPSHOT "Hokuyo client") for laser range finder
+ * [Ninedof client](https://github.com/project-capo/amber-java-clients/tree/mvn-repo/pl/edu/agh/amber/ninedof/amber-java-ninedof/1.0-SNAPSHOT "Ninedof client") for accelerometer, magnetometer and gyro sensors
+ * [Roboclaw client](https://github.com/project-capo/amber-java-clients/tree/mvn-repo/pl/edu/agh/amber/roboclaw/amber-java-roboclaw/1.0-SNAPSHOT "Roboclaw client") for motor controllers
 
-// Powoli przyspieszaj
-for (int i = 1; i <= 10; i++) {
-  roboclawProxy.sendMotorsCommand(100 * i, 100 * i, 100 * i, 100 * i);
-  
-  Thread.sleep(500);
-}
+Examples
+========
 
-// Odczytaj aktualną prędkość kół
-MotorsCurrentSpeed mcs = roboclawProxy.getCurrentMotorsSpeed();
-mcs.waitAvailable();
-			
-System.out.println(String.format(
-	"Motors current speed: fl: %d, fr: %d, rl: %d, rr: %d",				
-	mcs.getFrontLeftSpeed(), mcs.getFrontRightSpeed(),
-	mcs.getRearLeftSpeed(), mcs.getRearRightSpeed()));
+Motor controllers Roboclaw
+--------------------------
 
-// Zatrzymaj silniki
-roboclawProxy.stopMotors();
+Motor speed values is in unit `mm/s`.
 
-client.terminate();
-```
+Example code:
 
-## Sensora 9DOF (akcelerometr, żyroskop i magnetometr)
-
-Wartości podawane są w jednostkach:
-- akcelerometr - mG (tysięczne części przyspieszenia ziemskiego)
-- żyroskop - stopnie/minutę
-- magnetometr - mGs (tysięczne części Gausa)
-
-Przykładowy eclipsowy projekt można znaleźć w katalogu [examples/ninedof_example](examples/ninedof_example).
-
-Poniżej przykład wykorzystania biblioteki obsługi sensora 9DOF. Program dokonuje odczytu wszystkich wartości najpierw sposób synchroniczny, a potem cykliczny, za pomocą listenerów. Dla przejrzystości została pominięta obsługa wyjątków.
-
-```java
-// Połącz z robotem
-AmberClient client = new AmberClient("192.168.1.50", 26233);
-NinedofProxy ninedofProxy = new NinedofProxy(client, 0);
-
-// Odczyt synchroniczny
-for (int i = 0; i < 10; i++) {
-
-  // Pobieranie danych; w parametrach wybór sensorów, z których żądane są dane 
-  NinedofData ninedofData = ninedofProxy.getAxesData(true, true, true);
-  
-  // Poczekaj na nadejście danych
-  ninedofData.waitAvailable();
-				
-  // Wszystkie otrzymane dane są w strukturze ninedofData, poniżej wypisanie jednej wartości
-  System.out.println(ninedofData.getAccel().xAxis)
+    AmberClient client = new AmberClient("192.168.1.50", 26233);
+    RoboclawProxy roboclawProxy = new RoboclawProxy(client, 0);
     
-  Thread.sleep(10);
-}
-
-// Odczyt w sposób cykliczny, z częstotliwością 10ms
-
-// Rejestracja listera; w parametrach częstotliwość i wybór sensorów, z których żądane są dane
-ninedofProxy.registerNinedofDataListener(10, true, true, true, new CyclicDataListener<NinedofData>() {
-  			
-  	@Override
-  	public void handle(NinedofData ninedofData) {
+    for (int i = 1; i <= 10; i++) {
+        roboclawProxy.sendMotorsCommand(100 * i, 100 * i, 100 * i, 100 * i);
+        
+        Thread.sleep(500);
+    }
     
-      // Wszystkie otrzymane dane są w strukturze ninedofData, poniżej wypisanie jednej wartości
-      System.out.println(ninedofData.getAccel().xAxis)
-            
-  	}
-  });
-			
+    MotorsCurrentSpeed mcs = roboclawProxy.getCurrentMotorsSpeed();
+    mcs.waitAvailable();
+    
+    System.out.println(String.format("Motors current speed: fl: %d, fr: %d, rl: %d, rr: %d",
+        mcs.getFrontLeftSpeed(), mcs.getFrontRightSpeed(), mcs.getRearLeftSpeed(), mcs.getRearRightSpeed()));
+    
+    roboclawProxy.stopMotors();
+    client.terminate();
 
-client.terminate();
-```
+9DOF sensors
+------------
 
+Values are in units:
+
+* accelerometer - `mG`
+* gyro - `°/min`
+* magnetometer - `mGs`
+
+Example code:
+
+    AmberClient client = new AmberClient("192.168.1.50", 26233);
+    NinedofProxy ninedofProxy = new NinedofProxy(client, 0);
+    
+    for (int i = 0; i < 10; i++) {
+        NinedofData ninedofData = ninedofProxy.getAxesData(true, true, true);
+        ninedofData.waitAvailable();
+        
+        System.out.println(ninedofData.getAccel().xAxis);
+        
+        Thread.sleep(10);
+    }
+    
+    ninedofProxy.registerNinedofDataListener(10, true, true, true, new CyclicDataListener<NinedofData>() {
+    
+        @Override
+        public void handle(NinedofData ninedofData) {
+            System.out.println(ninedofData.getAccel().xAxis);
+        }
+    });
+    
+    client.terminate();
