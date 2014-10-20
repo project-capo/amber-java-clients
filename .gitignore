@@ -36,3 +36,8 @@ Thumbs.db
 
 # Folder config file
 Desktop.ini
+
+.idea/
+*.iml
+*.ipr
+*.iws
