@@ -8,6 +8,7 @@ This repository contains library used to managing drivers located on robot contr
 Supported devices
 -----------------
 
+* Hitec by `amber-java-hitec` - servo motor used in robot arm or 3D laser range scanner
 * Hokuyo by `amber-java-hokuyo` - laser range scanner
 * 9DOF by `amber-java-ninedof` - sensor stick with accelerometer, magnetometer and gyro
 * Roboclaw by `amber-java-roboclaw` - motor controllers
@@ -49,8 +50,18 @@ Next, add following selected dependencies:
             <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>
+            <groupId>pl.edu.agh.amber.hitec</groupId>
+            <artifactId>amber-java-hitec</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
             <groupId>pl.edu.agh.amber.hokuyo</groupId>
             <artifactId>amber-java-hokuyo</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>pl.edu.agh.amber.hokuyo-scanner</groupId>
+            <artifactId>amber-java-hokuyo-scanner</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>
@@ -71,7 +82,9 @@ How to use (jar)
 You can download jars from maven repository. You **need** to use *common part* with other jars. Find the **latest** version in places:
 
  * [Common part](https://github.com/project-capo/amber-java-clients/tree/mvn-repo/pl/edu/agh/amber/common/amber-java-common/1.0-SNAPSHOT "Common part") *required*
+ * [Hitec client](https://github.com/project-capo/amber-java-clients/tree/mvn-repo/pl/edu/agh/amber/hitec/amber-java-hitec/1.0-SNAPSHOT "Hitec client") for hitec servometer
  * [Hokuyo client](https://github.com/project-capo/amber-java-clients/tree/mvn-repo/pl/edu/agh/amber/hokuyo/amber-java-hokuyo/1.0-SNAPSHOT "Hokuyo client") for laser range finder
+  * [Hokuyo replacement client](https://github.com/project-capo/amber-java-clients/tree/mvn-repo/pl/edu/agh/amber/hokuyo-scanner/amber-java-hokuyo-scanner/1.0-SNAPSHOT "Hokuyo replacement client") used with *Hitec* instead of standard *Hokuyo* client
  * [Ninedof client](https://github.com/project-capo/amber-java-clients/tree/mvn-repo/pl/edu/agh/amber/ninedof/amber-java-ninedof/1.0-SNAPSHOT "Ninedof client") for accelerometer, magnetometer and gyro sensors
  * [Roboclaw client](https://github.com/project-capo/amber-java-clients/tree/mvn-repo/pl/edu/agh/amber/roboclaw/amber-java-roboclaw/1.0-SNAPSHOT "Roboclaw client") for motor controllers
 
