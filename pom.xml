@@ -18,7 +18,9 @@
         <module>amber-java-common</module>
         <module>amber-java-dummy</module>
         <module>amber-java-examples</module>
+        <module>amber-java-hitec</module>
         <module>amber-java-hokuyo</module>
+        <module>amber-java-hokuyo-scanner</module>
         <module>amber-java-ninedof</module>
         <module>amber-java-roboclaw</module>
     </modules>
