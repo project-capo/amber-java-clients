@@ -24,6 +24,7 @@ How to deploy
 -------------
 
 * Clone this project.
+* `mvn install` inside project.
 * Import project to your favorite IDE.
 
 If you want to use packages, run `mvn install` ar `mvn package` inside project.
@@ -95,8 +96,15 @@ You can download jars from maven repository. You **need** to use *common part* w
  * [Ninedof client](https://github.com/project-capo/amber-java-clients/tree/mvn-repo/pl/edu/agh/amber/ninedof/amber-java-ninedof/1.0-SNAPSHOT "Ninedof client") for accelerometer, magnetometer and gyro sensors
  * [Roboclaw client](https://github.com/project-capo/amber-java-clients/tree/mvn-repo/pl/edu/agh/amber/roboclaw/amber-java-roboclaw/1.0-SNAPSHOT "Roboclaw client") for motor controllers
 
+How to contribute
+-----------------
+
+Clone this repo, setup your environment, using maven. Next, change what you want and make pull request.
+
 Examples
 ========
+
+You can find it [here](https://github.com/dev-amber/amber-java-clients/tree/master/amber-java-examples/src/main/java).
 
 Motor controllers Roboclaw
 --------------------------
