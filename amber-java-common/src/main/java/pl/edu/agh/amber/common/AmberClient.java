@@ -7,7 +7,6 @@ import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.apache.commons.collections.keyvalue.MultiKey;
@@ -32,7 +31,7 @@ public class AmberClient {
 
 	private boolean terminated = false;
 
-	private final static int RECEIVING_BUFFER_SIZE = 4096;
+	private final static int RECEIVING_BUFFER_SIZE = 16384;
 	private final static int DEFAULT_PORT = 26233;
 
 	private Map<MultiKey, AmberProxy> proxyMap = new HashMap<MultiKey, AmberProxy>();
@@ -44,11 +43,11 @@ public class AmberClient {
 	 * Instantiates AmberClient object.
 	 * 
 	 * @param hostname
-	 *            robot's hostname
+	 *			robot's hostname
 	 * @param port
-	 *            robot's listening port (most times 26233)
+	 *			robot's listening port (most times 26233)
 	 * @throws IOException
-	 *             thrown on connection problem.
+	 *			 thrown on connection problem.
 	 */
 	public AmberClient(String hostname, int port) throws IOException {
 
@@ -81,9 +80,9 @@ public class AmberClient {
 	 * Instantiates AmberClient object.
 	 * 
 	 * @param hostname
-	 *            robot's hostname
+	 *			robot's hostname
 	 * @throws IOException
-	 *             thrown on connection problem.
+	 *			 thrown on connection problem.
 	 */
 	public AmberClient(String hostname) throws IOException {
 		this(hostname, DEFAULT_PORT);
@@ -93,11 +92,11 @@ public class AmberClient {
 	 * Registers {@link AmberProxy} in client.
 	 * 
 	 * @param deviceType
-	 *            device type ID
+	 *			device type ID
 	 * @param deviceID
-	 *            device instance ID
+	 *			device instance ID
 	 * @param proxy
-	 *            {@link AmberProxy} object.
+	 *			{@link AmberProxy} object.
 	 */
 	public void registerClient(int deviceType, int deviceID, AmberProxy proxy) {
 		proxyMap.put(new MultiKey(deviceType, deviceID), proxy);
@@ -107,11 +106,11 @@ public class AmberClient {
 	 * Sends message to the robot.
 	 * 
 	 * @param header
-	 *            Protobuf's {@link DriverHdr}, message header.
+	 *			Protobuf's {@link DriverHdr}, message header.
 	 * @param message
-	 *            Prototobuf's {@link DriverMsg}, message contents.
+	 *			Prototobuf's {@link DriverMsg}, message contents.
 	 * @throws IOException
-	 *             thrown on connection problem.
+	 *			 thrown on connection problem.
 	 */
 	synchronized public void sendMessage(DriverHdr header, DriverMsg message)
 			throws IOException {
@@ -168,9 +167,13 @@ public class AmberClient {
 		}
 	}
 
+	public static short getShortFromBigEndianRange(byte[] range) {
+		return (short) ((range[0] << 8) + (range[1] & 0xff));
+	}
+
 	private void messageReceivingLoop() {
-		DatagramPacket packet = new DatagramPacket(
-				new byte[RECEIVING_BUFFER_SIZE], RECEIVING_BUFFER_SIZE);
+		byte[] buf = new byte[RECEIVING_BUFFER_SIZE];
+		DatagramPacket packet = new DatagramPacket(buf, RECEIVING_BUFFER_SIZE);
 		AmberProxy clientProxy = null;
 
 		while (true) {
@@ -180,36 +183,30 @@ public class AmberClient {
 
 				byte[] packetBytes = packet.getData();
 
-				int headerLen = (packetBytes[0] << 8) | packetBytes[1];
-				ByteString headerByteString = ByteString.copyFrom(
-						packet.getData(), 2, headerLen);
+				int headerLen = (packetBytes[0] << 8) + (packetBytes[1] & 0xff);
+				ByteString headerByteString = ByteString.copyFrom(packet.getData(), 2, headerLen);
 				DriverHdr header = DriverHdr.parseFrom(headerByteString);
 
-				int messageLen = (packetBytes[2 + headerLen] << 8)
-						| packetBytes[2 + headerLen + 1];
-				ByteString messageByteString = ByteString.copyFrom(
-						packet.getData(), 2 + headerLen + 2, messageLen);
+				int messageLen = (packetBytes[2 + headerLen] << 8) + (packetBytes[2 + headerLen + 1] & 0xff);
+				ByteString messageByteString = ByteString.copyFrom(packet.getData(), 2 + headerLen + 2, messageLen);
 				DriverMsg message;
 
-				if (!header.hasDeviceType() || !header.hasDeviceID()
-						|| header.getDeviceType() == 0) {
+				if (!header.hasDeviceType() || !header.hasDeviceID() || header.getDeviceType() == 0) {
 					message = DriverMsg.parseFrom(messageByteString);
 					handleMessageFromMediator(header, message);
 
 				} else {
-					clientProxy = proxyMap.get(new MultiKey(header
-							.getDeviceType(), header.getDeviceID()));
+					clientProxy = proxyMap.get(new MultiKey(header.getDeviceType(), header.getDeviceID()));
 
 					if (clientProxy == null) {
 						logger.warning(String.format(
-								"Client proxy with given device type (%d) and ID (%d) not found, "
-										+ "ignoring message.",
-								header.getDeviceType(), header.getDeviceID()));
+								"Client proxy with given device type (%d) and ID (%d) not found, ignoring message.",
+								header.getDeviceType(), header.getDeviceID()
+						));
 						continue;
 					}
 
-					message = DriverMsg.parseFrom(messageByteString,
-							clientProxy.getExtensionRegistry());
+					message = DriverMsg.parseFrom(messageByteString, clientProxy.getExtensionRegistry());
 					handleMessageFromDriver(header, message, clientProxy);
 				}
 

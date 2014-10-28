@@ -23,7 +23,7 @@ public class FutureObject {
 	 * Blocks until data is available.
 	 * 
 	 * @throws Exception
-	 *             any exception
+	 *			 any exception
 	 */
 	public synchronized void waitAvailable() throws Exception {
 		try {
@@ -38,6 +38,18 @@ public class FutureObject {
 	}
 
 	/**
+	 * Blocks until data is available or to timeout.
+	 *
+	 * @param timeout in milliseconds
+	 * @throws Exception
+	 */
+	public synchronized void waitAvailable(long timeout) throws Exception {
+		if (!isAvailable()) {
+			wait(timeout);
+		}
+	}
+
+	/**
 	 * Sets the object is available and notifies all waiting clients.
 	 */
 	public synchronized void setAvailable() {
@@ -49,7 +61,7 @@ public class FutureObject {
 	 * Sets exception and notifies all waiting clients.
 	 * 
 	 * @param e
-	 *            Exception to throw.
+	 *			Exception to throw.
 	 */
 	public synchronized void setException(Exception e) {
 		available = true;
