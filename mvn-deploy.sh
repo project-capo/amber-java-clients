@@ -8,6 +8,7 @@ pushd ${__dir}
     mvn clean
     mvn deploy
 
+    rm -rf ${__dir}/repo
     mkdir -p ${__dir}/repo
     for path in $(find . -type d -name mvn-repo)
     do
