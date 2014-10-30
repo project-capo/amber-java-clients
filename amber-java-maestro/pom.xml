@@ -8,8 +8,8 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <groupId>pl.edu.agh.amber.hitec</groupId>
-    <artifactId>amber-java-hitec</artifactId>
+    <groupId>pl.edu.agh.amber.maestro</groupId>
+    <artifactId>amber-java-maestro</artifactId>
     <packaging>jar</packaging>
     <version>1.0-SNAPSHOT</version>
 
