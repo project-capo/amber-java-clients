@@ -3,6 +3,7 @@ import pl.edu.agh.amber.location.LocationProxy;
 import pl.edu.agh.amber.location.LocationCurrent;
 
 import java.io.IOException;
+import java.util.Scanner;
 
 /**
  * Location proxy example.
@@ -16,10 +17,17 @@ public class LocationExample {
 	}
 
 	public void runDemo() {
+		Scanner keyboard = new Scanner(System.in);
+		System.out.print("IP (default: 127.0.0.1): ");
+		String hostname = keyboard.nextLine();
+
+		if ("".equals(hostname)) {
+			hostname = "127.0.0.1";
+		}
 
 		AmberClient client;
 		try {
-			client = new AmberClient("127.0.0.1", 26233);
+			client = new AmberClient(hostname, 26233);
 
 		} catch (IOException e) {
 			System.out.println("Unable to connect to robot: " + e);

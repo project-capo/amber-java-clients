@@ -4,6 +4,7 @@ import pl.edu.agh.amber.dummy.DummyProxy;
 import pl.edu.agh.amber.dummy.Status;
 
 import java.io.IOException;
+import java.util.Scanner;
 
 /**
  * Dummy sensor proxy example.
@@ -17,9 +18,17 @@ public class DummyExample {
     }
 
     public void runDemo() {
+        Scanner keyboard = new Scanner(System.in);
+        System.out.print("IP (default: 127.0.0.1): ");
+        String hostname = keyboard.nextLine();
+
+        if ("".equals(hostname)) {
+            hostname = "127.0.0.1";
+        }
+
         AmberClient client;
         try {
-            client = new AmberClient("127.0.0.1", 26233);
+            client = new AmberClient(hostname, 26233);
 
         } catch (IOException e) {
             System.out.println("Unable to connect to robot: " + e);
