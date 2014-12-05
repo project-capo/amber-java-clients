@@ -52,8 +52,8 @@ Next, add following selected dependencies:
             <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>
-            <groupId>pl.edu.agh.amber.hitec</groupId>
-            <artifactId>amber-java-hitec</artifactId>
+            <groupId>pl.edu.agh.amber.drivetopoint</groupId>
+            <artifactId>amber-java-drive-to-point</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>
@@ -69,6 +69,11 @@ Next, add following selected dependencies:
         <dependency>
             <groupId>pl.edu.agh.amber.location</groupId>
             <artifactId>amber-java-location</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>pl.edu.agh.amber.maestro</groupId>
+            <artifactId>amber-java-maestro</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>
