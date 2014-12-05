@@ -8,4 +8,8 @@ public class Point {
         this.y = y;
         this.r = r;
     }
+
+    public String toString() {
+        return String.format("target: %f, %f, %f", x, y, r);
+    }
 }
