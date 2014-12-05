@@ -9,7 +9,7 @@ import java.util.Scanner;
 /**
  * Dummy sensor proxy example.
  *
- * @author Paweł Suder <psuder@student.agh.edu.pl>
+ * @author Pawel Suder <pawel@suder.info>
  */
 public class DummyExample {
 
