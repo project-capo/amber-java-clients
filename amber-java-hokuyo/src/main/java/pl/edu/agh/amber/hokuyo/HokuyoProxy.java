@@ -17,7 +17,7 @@ import java.util.logging.Logger;
 /**
  * Proxy used to connect to Hokuyo sensor.
  *
- * @author Paweł Suder <psuder@student.agh.edu.pl>
+ * @author Pawel Suder <pawel@suder.info>
  */
 public class HokuyoProxy extends AmberProxy {
 

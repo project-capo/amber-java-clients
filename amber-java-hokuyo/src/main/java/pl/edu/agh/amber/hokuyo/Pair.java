@@ -1,8 +1,5 @@
 package pl.edu.agh.amber.hokuyo;
 
-/**
- * Created by paoolo on 24.02.14.
- */
 class Pair<T, U> {
 
     public final T first;

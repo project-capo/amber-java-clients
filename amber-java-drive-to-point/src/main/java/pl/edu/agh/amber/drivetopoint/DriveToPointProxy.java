@@ -15,6 +15,11 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Logger;
 
+/**
+ * Proxy used to connect to Drive to point driver.
+ *
+ * @author Pawel Suder <pawel@suder.info>
+ */
 public class DriveToPointProxy extends AmberProxy {
 
     /* Magic-constant */
@@ -36,7 +41,30 @@ public class DriveToPointProxy extends AmberProxy {
 
     @Override
     public void handleDataMsg(CommonProto.DriverHdr header, CommonProto.DriverMsg message) {
+        logger.fine("Handling data message");
 
+        if (message.hasAckNum() && message.getAckNum() != 0) {
+            int ackNum = message.getAckNum();
+
+            // TODO: automatically removing abandoned futureObjects
+            if (futureObjectsMap.containsKey(ackNum)) {
+                FutureObject futureObject = futureObjectsMap.remove(ackNum);
+
+                if (futureObject != null) {
+                    if (futureObject instanceof Result) {
+                        if (message.getExtension(DriveToPointProto.getNextTarget) ||
+                                message.getExtension(DriveToPointProto.getVisitedTarget)) {
+                            fillTarget((Result<Point>) futureObject, message);
+
+                        } else if (message.getExtension(DriveToPointProto.getNextTargets) ||
+                                message.getExtension(DriveToPointProto.getVisitedTargets)) {
+                            fillTargets((Result<List<Point>>) futureObject, message);
+
+                        }
+                    }
+                }
+            }
+        }
     }
 
     @Override

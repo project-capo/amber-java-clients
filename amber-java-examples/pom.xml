@@ -20,13 +20,23 @@
             <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>
+            <groupId>pl.edu.agh.amber.drivetopoint</groupId>
+            <artifactId>amber-java-drive-to-point</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>pl.edu.agh.amber.dummy</groupId>
+            <artifactId>amber-java-dummy</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
             <groupId>pl.edu.agh.amber.hokuyo</groupId>
             <artifactId>amber-java-hokuyo</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>
-            <groupId>pl.edu.agh.amber.roboclaw</groupId>
-            <artifactId>amber-java-roboclaw</artifactId>
+            <groupId>pl.edu.agh.amber.location</groupId>
+            <artifactId>amber-java-location</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>
@@ -35,13 +45,8 @@
             <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>
-            <groupId>pl.edu.agh.amber.dummy</groupId>
-            <artifactId>amber-java-dummy</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-		<dependency>
-            <groupId>pl.edu.agh.amber.location</groupId>
-            <artifactId>amber-java-location</artifactId>
+            <groupId>pl.edu.agh.amber.roboclaw</groupId>
+            <artifactId>amber-java-roboclaw</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
     </dependencies>
