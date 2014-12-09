@@ -39,30 +39,6 @@ public class LocationProxy extends AmberProxy {
 		LocationProto.registerAllExtensions(extensionRegistry);
 	}
 
-	public void sendLocationCommand(double x, double y, double alfa, double p,
-			double timeStamp) throws IOException {
-		logger.fine(String.format("Sending LocationCommand: %e %e %e %e %e.",
-				x, y, alfa, p, timeStamp));
-
-		DriverMsg.Builder driverMsgBuilder = DriverMsg.newBuilder();
-		driverMsgBuilder.setType(DriverMsg.MsgType.DATA);
-
-		Location.Builder commandBuilder = Location.newBuilder();
-
-		commandBuilder.setX(x);
-		commandBuilder.setY(y);
-		commandBuilder.setAlfa(alfa);
-		commandBuilder.setP(p);
-		commandBuilder.setTimeStamp(timeStamp);
-
-		Location location = commandBuilder.build();
-
-		driverMsgBuilder.setExtension(LocationProto.currentLocation, location);
-		driverMsgBuilder.setSynNum(getNextSynNum());
-
-		amberClient.sendMessage(buildHeader(), driverMsgBuilder.build());
-	}
-
 	public LocationCurrent getCurrentLocation() throws IOException {
 		logger.fine("Getting current location.");
 
@@ -83,7 +59,7 @@ public class LocationProxy extends AmberProxy {
 			CommonProto.DriverMsg message) {
 		logger.fine("Handling data message");
 
-		if (!message.hasAckNum() || message.getAckNum() == 0) {
+		if (message.hasAckNum() && message.getAckNum() != 0) {
 		} else {
 			int ackNum = message.getAckNum();
 
