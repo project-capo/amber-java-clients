@@ -16,6 +16,7 @@
 
     <modules>
         <module>amber-java-common</module>
+        <module>amber-java-drive-to-point</module>
         <module>amber-java-dummy</module>
         <module>amber-java-examples</module>
         <module>amber-java-hokuyo</module>

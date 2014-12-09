@@ -9,7 +9,7 @@ import java.util.Scanner;
 /**
  * Hokuyo sensor proxy example.
  *
- * @author Paweł Suder <psuder@student.agh.edu.pl>
+ * @author Pawel Suder <pawel@suder.info>
  */
 public class HokuyoExample {
 

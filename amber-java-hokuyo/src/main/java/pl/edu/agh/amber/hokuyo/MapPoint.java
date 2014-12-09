@@ -2,7 +2,7 @@ package pl.edu.agh.amber.hokuyo;
 
 /**
  * @author GreenWing
- * @author Pawel Suder
+ * @author Pawel Suder <pawel@suder.info>
  */
 public final class MapPoint {
 

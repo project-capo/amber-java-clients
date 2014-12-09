@@ -13,6 +13,11 @@ import pl.edu.agh.amber.hitec.proto.HitecProto.SetSameAngle;
 import java.io.IOException;
 import java.util.logging.Logger;
 
+/**
+ * Proxy used to connect to use Maestro servo motors controller.
+ *
+ * @author Grzegorz Dziuban
+ */
 public class HitecProxy extends AmberProxy {
 
     private final static int DEVICE_TYPE = 6;
