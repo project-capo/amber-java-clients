@@ -8,6 +8,7 @@ This repository contains library used to managing drivers located on robot contr
 Supported devices
 -----------------
 
+* DriveToPoint by `amber-java-drive-to-point` - virtual driver used in automatic driving robots to point
 * Hitec by `amber-java-hitec` - servo motor used in robot arm or 3D laser range scanner
 * Hokuyo by `amber-java-hokuyo` - laser range scanner
 * Location by `amber-java-location` - relative robots location  
@@ -94,6 +95,7 @@ How to use (jar)
 You can download jars from maven repository. You **need** to use *common part* with other jars. Find the **latest** version in places:
 
  * [Common part](https://github.com/project-capo/amber-java-clients/tree/mvn-repo/pl/edu/agh/amber/common/amber-java-common/1.0-SNAPSHOT "Common part") *required*
+ * [DriveToPoint part](https://github.com/project-capo/amber-java-clients/tree/mvn-repo/pl/edu/agh/amber/drivetopoint/amber-java-drive-to-point/1.0-SNAPSHOT "DriveToPoint client") for virtual drive-to-point driver
  * [Hitec client](https://github.com/project-capo/amber-java-clients/tree/mvn-repo/pl/edu/agh/amber/hitec/amber-java-hitec/1.0-SNAPSHOT "Hitec client") for hitec servometer
  * [Hokuyo client](https://github.com/project-capo/amber-java-clients/tree/mvn-repo/pl/edu/agh/amber/hokuyo/amber-java-hokuyo/1.0-SNAPSHOT "Hokuyo client") for laser range finder
   * [Hokuyo replacement client](https://github.com/project-capo/amber-java-clients/tree/mvn-repo/pl/edu/agh/amber/hokuyo-scanner/amber-java-hokuyo-scanner/1.0-SNAPSHOT "Hokuyo replacement client") used with *Hitec* instead of standard *Hokuyo* client
