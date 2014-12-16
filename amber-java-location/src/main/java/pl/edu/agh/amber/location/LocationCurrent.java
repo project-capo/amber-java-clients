@@ -11,7 +11,6 @@ public class LocationCurrent extends FutureObject {
 	private double timeStamp;
 
 	public LocationCurrent() {
-
 	}
 
 	public LocationCurrent(double x, double y, double angle, double p,
