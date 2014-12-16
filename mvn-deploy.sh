@@ -19,6 +19,7 @@ pushd ${__dir}
     cp --verbose -r ${__dir}/repo/mvn-repo/pl ${__dir}/
     git add --all
     git commit -m "Update mvn-repo"
+    git pull -s recursive -X ours --no-edit origin mvn-repo
     git push origin mvn-repo
 
     git checkout ${__current_branch}
