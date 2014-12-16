@@ -60,6 +60,8 @@ public class DriveToPointProxy extends AmberProxy {
                                 message.getExtension(DriveToPointProto.getVisitedTargets)) {
                             fillTargets((Result<List<Point>>) futureObject, message);
 
+                        } else if (message.getExtension(DriveToPointProto.getConfiguration)) {
+                            fillConfiguration((Result<Configuration>) futureObject, message);
                         }
                     }
                 }
@@ -220,25 +222,56 @@ public class DriveToPointProxy extends AmberProxy {
         return driverMsgBuilder.build();
     }
 
+    public Result<Configuration> getConfiguration() throws IOException {
+        logger.fine("Get configuration");
+
+        int synNum = getNextSynNum();
+
+        CommonProto.DriverMsg msg = buildGetConfiguration(synNum);
+
+        Result<Configuration> configuration = new Result<Configuration>();
+        futureObjectsMap.put(synNum, configuration);
+
+        amberClient.sendMessage(buildHeader(), msg);
+
+        return configuration;
+    }
+
+    private CommonProto.DriverMsg buildGetConfiguration(int synNum) {
+        CommonProto.DriverMsg.Builder driverMsgBuilder = CommonProto.DriverMsg.newBuilder();
+
+        driverMsgBuilder.setType(CommonProto.DriverMsg.MsgType.DATA);
+        driverMsgBuilder.setExtension(DriveToPointProto.getConfiguration, true);
+
+        driverMsgBuilder.setSynNum(synNum);
+
+        return driverMsgBuilder.build();
+    }
+
     private void fillTarget(Result<Point> result, CommonProto.DriverMsg message) {
-        DriveToPointProto.Targets targets = message.getExtension(DriveToPointProto.targets);
+        DriveToPointProto.Targets targetsMessage = message.getExtension(DriveToPointProto.targets);
+        DriveToPointProto.Location locationMessage = message.getExtension(DriveToPointProto.location);
 
         Point point = null;
-        if (targets.getLongitudesCount() > 0 && targets.getLatitudesCount() > 0 && targets.getRadiusesCount() > 0) {
-            point = new Point(targets.getLongitudes(0), targets.getLatitudes(0), targets.getRadiuses(0));
+        if (targetsMessage.getLongitudesCount() > 0 && targetsMessage.getLatitudesCount() > 0 && targetsMessage.getRadiusesCount() > 0) {
+            point = new Point(targetsMessage.getLongitudes(0), targetsMessage.getLatitudes(0), targetsMessage.getRadiuses(0));
         }
+        Location location = new Location(locationMessage.getX(), locationMessage.getY(), locationMessage.getAlfa(),
+                locationMessage.getP(), locationMessage.getTimeStamp());
 
         result.setResult(point);
+        result.setLocation(location);
         result.setAvailable();
     }
 
     private void fillTargets(Result<List<Point>> result, CommonProto.DriverMsg message) {
-        DriveToPointProto.Targets targets = message.getExtension(DriveToPointProto.targets);
+        DriveToPointProto.Targets targetsMessage = message.getExtension(DriveToPointProto.targets);
         List<Point> points = new LinkedList<Point>();
+        DriveToPointProto.Location locationMessage = message.getExtension(DriveToPointProto.location);
 
-        List<Double> longitudes = targets.getLongitudesList();
-        List<Double> latitudes = targets.getLatitudesList();
-        List<Double> radiuses = targets.getRadiusesList();
+        List<Double> longitudes = targetsMessage.getLongitudesList();
+        List<Double> latitudes = targetsMessage.getLatitudesList();
+        List<Double> radiuses = targetsMessage.getRadiusesList();
 
         Iterator<Double> longitudesIterator = longitudes.iterator();
         Iterator<Double> latitudesIterator = latitudes.iterator();
@@ -247,8 +280,19 @@ public class DriveToPointProxy extends AmberProxy {
         while (longitudesIterator.hasNext() && latitudesIterator.hasNext() && radiusesIterator.hasNext()) {
             points.add(new Point(longitudesIterator.next(), latitudesIterator.next(), radiusesIterator.next()));
         }
+        Location location = new Location(locationMessage.getX(), locationMessage.getY(), locationMessage.getAlfa(),
+                locationMessage.getP(), locationMessage.getTimeStamp());
 
         result.setResult(points);
+        result.setLocation(location);
+        result.setAvailable();
+    }
+
+    private void fillConfiguration(Result<Configuration> result, CommonProto.DriverMsg message) {
+        DriveToPointProto.Configuration configurationMessage = message.getExtension(DriveToPointProto.configuration);
+        Configuration configuration = new Configuration(configurationMessage.getMaxSpeed());
+
+        result.setResult(configuration);
         result.setAvailable();
     }
 }
