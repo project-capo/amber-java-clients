@@ -1,5 +1,6 @@
 import pl.edu.agh.amber.common.AmberClient;
 import pl.edu.agh.amber.drivetopoint.DriveToPointProxy;
+import pl.edu.agh.amber.drivetopoint.Location;
 import pl.edu.agh.amber.drivetopoint.Point;
 import pl.edu.agh.amber.drivetopoint.Result;
 
@@ -45,19 +46,23 @@ public class DriveToPointExample {
 
             Result<Point> resultPoint = driveToPointProxy.getNextTarget();
             Point nextTarget = resultPoint.getResult();
-            System.out.println(nextTarget);
+            Location currentLocation = resultPoint.getLocation();
+            System.out.println(String.format("%s, %s", nextTarget.toString(), currentLocation.toString()));
 
             Result<List<Point>> resultPoints = driveToPointProxy.getNextTargets();
             List<Point> nextTargets = resultPoints.getResult();
-            System.out.println(nextTargets);
+            currentLocation = resultPoints.getLocation();
+            System.out.println(String.format("%s, %s", nextTargets.toString(), currentLocation.toString()));
 
             resultPoint = driveToPointProxy.getVisitedTarget();
             Point visitedTarget = resultPoint.getResult();
-            System.out.println(visitedTarget);
+            currentLocation = resultPoint.getLocation();
+            System.out.println(String.format("%s, %s", visitedTarget.toString(), currentLocation.toString()));
 
             resultPoints = driveToPointProxy.getVisitedTargets();
             List<Point> visitedTargets = resultPoints.getResult();
-            System.out.println(visitedTargets);
+            currentLocation = resultPoints.getLocation();
+            System.out.println(String.format("%s, %s", visitedTargets.toString(), currentLocation.toString()));
 
         } catch (IOException e) {
             System.out.println("Error in sending a command: " + e);
