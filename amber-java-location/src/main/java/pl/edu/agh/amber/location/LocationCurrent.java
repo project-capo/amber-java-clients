@@ -24,10 +24,6 @@ public class LocationCurrent extends FutureObject {
 	}
 
 	public double getX() throws Exception {
-		if (!available) {
-			waitAvailable();
-		}
-
 		return X;
 	}
 
@@ -36,10 +32,6 @@ public class LocationCurrent extends FutureObject {
 	}
 
 	public double getY() throws Exception {
-		if (!available) {
-			waitAvailable();
-		}
-
 		return Y;
 	}
 
@@ -48,10 +40,6 @@ public class LocationCurrent extends FutureObject {
 	}
 
 	public double getAngle() throws Exception {
-		if (!available) {
-			waitAvailable();
-		}
-
 		return angle;
 	}
 
@@ -60,10 +48,6 @@ public class LocationCurrent extends FutureObject {
 	}
 
 	public double getP() throws Exception {
-		if (!available) {
-			waitAvailable();
-		}
-
 		return P;
 	}
 
@@ -72,10 +56,6 @@ public class LocationCurrent extends FutureObject {
 	}
 
 	public double getTimeStamp() throws Exception {
-		if (!available) {
-			waitAvailable();
-		}
-
 		return timeStamp;
 	}
 
