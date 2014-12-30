@@ -59,8 +59,8 @@ public class LocationProxy extends AmberProxy {
 			CommonProto.DriverMsg message) {
 		logger.fine("Handling data message");
 
-		if (message.hasAckNum() && message.getAckNum() != 0) {
-		} else {
+		if (message.hasAckNum() && message.getAckNum() != 0) 
+		{
 			int ackNum = message.getAckNum();
 
 			// TODO: automatically removing abandoned futureObjects
@@ -107,4 +107,25 @@ public class LocationProxy extends AmberProxy {
 
 		return driverMsgBuilder.build();
 	}
+	
+	public void UploadMap(String sMap) throws IOException {
+		logger.fine("Upload map to location driver.");
+
+		int synNum = getNextSynNum();
+
+		DriverMsg uploadMapMsg = buildUploadMapMsg(synNum,sMap);
+
+		amberClient.sendMessage(buildHeader(), uploadMapMsg);
+	}
+	
+	private DriverMsg buildUploadMapMsg(int synNum,String sMap) {
+		DriverMsg.Builder driverMsgBuilder = DriverMsg.newBuilder();
+
+		driverMsgBuilder.setType(DriverMsg.MsgType.DATA);
+		driverMsgBuilder.setExtension(LocationProto.uploadMap, sMap);
+		driverMsgBuilder.setSynNum(synNum);
+
+		return driverMsgBuilder.build();
+	}
+
 }
