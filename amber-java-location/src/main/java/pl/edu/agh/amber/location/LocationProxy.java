@@ -59,7 +59,8 @@ public class LocationProxy extends AmberProxy {
 			CommonProto.DriverMsg message) {
 		logger.fine("Handling data message");
 
-		if (message.hasAckNum() && message.getAckNum() != 0) {
+		if (message.hasAckNum() && message.getAckNum() != 0)
+		{
 			int ackNum = message.getAckNum();
 
 			// TODO: automatically removing abandoned futureObjects
