@@ -3,6 +3,8 @@ import pl.edu.agh.amber.location.LocationProxy;
 import pl.edu.agh.amber.location.LocationCurrent;
 
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Scanner;
 
 /**
@@ -42,8 +44,8 @@ public class LocationExample {
 			lok.waitAvailable();
 
 			System.out.println(String.format("Current location: X: %e, Y: %e, Alfa: %e, P: %e, TimeStamp: %e",
-									lok.getX(), lok.getY(), lok.getAngle(),
-									lok.getP(), lok.getTimeStamp()));
+					lok.getX(), lok.getY(), lok.getAngle(),
+					lok.getP(), lok.getTimeStamp()));
 
 		} catch (IOException e) {
 			System.out.println("Error in sending a command: " + e);
@@ -52,5 +54,15 @@ public class LocationExample {
 		} finally {
 			client.terminate();
 		}
+	}
+
+	/* Example upload JSON map to robot 
+	String tempMapJSON = readMapFromFile("<FileName.roson>");			
+	locationProxy.UploadMap(tempMapJSON);
+	 */
+	private String readMapFromFile(String sPath) throws IOException
+	{
+		byte[] encoded = Files.readAllBytes(Paths.get(sPath));			
+		return new String(encoded);
 	}
 }
