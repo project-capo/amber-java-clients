@@ -41,28 +41,19 @@ public class DriveToPointExample {
         DriveToPointProxy driveToPointProxy = new DriveToPointProxy(client, 0);
 
         try {
-            List<Point> targets = Arrays.asList(new Point(0, 0, 10), new Point(500, 500, 10));
+            List<Point> targets = Arrays.asList(new Point(2447.25, 4221.25, 100.0),
+                    new Point(1467.06, 4142.85, 100.0), new Point(673.888, 3769.64, 100.0),
+                    new Point(473.391, 2967.81, 100.0));
             driveToPointProxy.setTargets(targets);
 
-            Result<Point> resultPoint = driveToPointProxy.getNextTarget();
-            Point nextTarget = resultPoint.getResult();
-            Location currentLocation = resultPoint.getLocation();
-            System.out.println(String.format("%s, %s", nextTarget.toString(), currentLocation.toString()));
-
-            Result<List<Point>> resultPoints = driveToPointProxy.getNextTargets();
-            List<Point> nextTargets = resultPoints.getResult();
-            currentLocation = resultPoints.getLocation();
-            System.out.println(String.format("%s, %s", nextTargets.toString(), currentLocation.toString()));
-
-            resultPoint = driveToPointProxy.getVisitedTarget();
-            Point visitedTarget = resultPoint.getResult();
-            currentLocation = resultPoint.getLocation();
-            System.out.println(String.format("%s, %s", visitedTarget.toString(), currentLocation.toString()));
-
-            resultPoints = driveToPointProxy.getVisitedTargets();
-            List<Point> visitedTargets = resultPoints.getResult();
-            currentLocation = resultPoints.getLocation();
-            System.out.println(String.format("%s, %s", visitedTargets.toString(), currentLocation.toString()));
+            while (true) {
+                Result<List<Point>> resultNextTargets = driveToPointProxy.getNextTargets();
+                Result<List<Point>> resultVisitedTargets = driveToPointProxy.getVisitedTargets();
+                List<Point> nextTargets = resultNextTargets.getResult();
+                List<Point> visitedTargets = resultVisitedTargets.getResult();
+                System.out.println(String.format("next targets: %s, visited targets: %s", nextTargets.toString(), visitedTargets.toString()));
+                Thread.sleep(1000);
+            }
 
         } catch (IOException e) {
             System.out.println("Error in sending a command: " + e);

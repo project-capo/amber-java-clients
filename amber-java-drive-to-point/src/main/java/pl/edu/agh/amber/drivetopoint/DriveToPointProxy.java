@@ -125,12 +125,12 @@ public class DriveToPointProxy extends AmberProxy {
 
         CommonProto.DriverMsg msg = buildGetNextTargetRequestMsg(synNum);
 
-        Result<Point> status = new Result<Point>();
-        futureObjectsMap.put(synNum, status);
+        Result<Point> result = new Result<Point>();
+        futureObjectsMap.put(synNum, result);
 
         amberClient.sendMessage(buildHeader(), msg);
 
-        return status;
+        return result;
     }
 
     private CommonProto.DriverMsg buildGetNextTargetRequestMsg(int synNum) {
@@ -151,12 +151,12 @@ public class DriveToPointProxy extends AmberProxy {
 
         CommonProto.DriverMsg msg = buildGetNextTargetsRequestMsg(synNum);
 
-        Result<List<Point>> status = new Result<List<Point>>();
-        futureObjectsMap.put(synNum, status);
+        Result<List<Point>> result = new Result<List<Point>>();
+        futureObjectsMap.put(synNum, result);
 
         amberClient.sendMessage(buildHeader(), msg);
 
-        return status;
+        return result;
     }
 
     private CommonProto.DriverMsg buildGetNextTargetsRequestMsg(int synNum) {
@@ -177,12 +177,12 @@ public class DriveToPointProxy extends AmberProxy {
 
         CommonProto.DriverMsg msg = buildGetVisitedTargetRequestMsg(synNum);
 
-        Result<Point> status = new Result<Point>();
-        futureObjectsMap.put(synNum, status);
+        Result<Point> result = new Result<Point>();
+        futureObjectsMap.put(synNum, result);
 
         amberClient.sendMessage(buildHeader(), msg);
 
-        return status;
+        return result;
     }
 
     private CommonProto.DriverMsg buildGetVisitedTargetRequestMsg(int synNum) {
@@ -203,12 +203,12 @@ public class DriveToPointProxy extends AmberProxy {
 
         CommonProto.DriverMsg msg = buildGetVisitedTargetsRequestMsg(synNum);
 
-        Result<List<Point>> status = new Result<List<Point>>();
-        futureObjectsMap.put(synNum, status);
+        Result<List<Point>> result = new Result<List<Point>>();
+        futureObjectsMap.put(synNum, result);
 
         amberClient.sendMessage(buildHeader(), msg);
 
-        return status;
+        return result;
     }
 
     private CommonProto.DriverMsg buildGetVisitedTargetsRequestMsg(int synNum) {
