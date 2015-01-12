@@ -8,13 +8,13 @@ public class LocationCurrent extends FutureObject {
 	private double Y;
 	private double angle;
 	private double P;
-	private double timeStamp;
+	private long timeStamp;
 
 	public LocationCurrent() {
 	}
 
 	public LocationCurrent(double x, double y, double angle, double p,
-			double timeStamp) {
+			long timeStamp) {
 		this.X = x;
 		this.Y = y;
 		this.angle = angle;
@@ -54,11 +54,11 @@ public class LocationCurrent extends FutureObject {
 		this.P = p;
 	}
 
-	public double getTimeStamp() throws Exception {
+	public long getTimeStamp() throws Exception {
 		return timeStamp;
 	}
 
-	public void setTimeStamp(double timeStamp) {
+	public void setTimeStamp(long timeStamp) {
 		this.timeStamp = timeStamp;
 	}
 }
