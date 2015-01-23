@@ -1,3 +1,6 @@
+env:
+  global:
+   - secure: "FdHcxJlWNBRBnRsORAfRicW1TKQ/SfI9SIt93AgnALvFf1B7/TqUA9cACTZTx949gAlxk9sDnl7peZf59a8ufibYXdvvI0iGjm2SCuYbTnuwa+nIvdetQty6u2rlTMlr30gJ2uhtAf0rw/IGZ6hSow0KAk/aWCr6M1R5lLpnHxo="
 language: java
 java:
   - oraclejdk7
@@ -7,3 +10,12 @@ install:
   - mvn install -DskipTests=true
 script:
   - mvn test
+addons:
+  coverity_scan:
+    project:
+      name: "project-capo/amber-java-clients"
+      description: "Build submitted via Travis CI"
+    notification_email: pawel@suder.info
+    build_command_prepend: "mvn clean"
+    build_command:   "mvn -DskipTests=true compile"
+    branch_pattern: coverity_scan
