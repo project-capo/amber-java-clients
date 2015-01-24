@@ -41,9 +41,11 @@ public class DriveToPointExample {
         DriveToPointProxy driveToPointProxy = new DriveToPointProxy(client, 0);
 
         try {
-            List<Point> targets = Arrays.asList(new Point(2447.25, 4221.25, 100.0),
-                    new Point(1467.06, 4142.85, 100.0), new Point(673.888, 3769.64, 100.0),
-                    new Point(473.391, 2967.81, 100.0));
+            List<Point> targets = Arrays.asList(
+                    new Point(2.44725, 4.22125, 0.25),
+                    new Point(1.46706, 4.14285, 0.25),
+                    new Point(0.67389, 3.76964, 0.25),
+                    new Point(0.47339, 2.96781, 0.25));
             driveToPointProxy.setTargets(targets);
 
             while (true) {
