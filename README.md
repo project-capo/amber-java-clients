@@ -183,7 +183,7 @@ In HitecProxy client:
 
 Example code:
 
-AmberClient client = new AmberClient("192.168.1.50", 26233);
+    AmberClient client = new AmberClient("192.168.1.50", 26233);
     HitecProxy hitecProxy = new HitecProxy(client, 0);
     
     for (int i = 0; i <= 180; i+=10) {
