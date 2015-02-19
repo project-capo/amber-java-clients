@@ -181,7 +181,7 @@ Important notes(Tips and tricks):
 * maven will build client project only if there is protoc executive path somewhere in the environment variables.
 * jar files (client libraries) can not be mixed in terms of compilation date. We can not take amber-java-common.jar from different build than amber-java-maestro.jar is builded. It can cause following error:
     Caused by: com.google.protobuf.
-    Descriptors$DescriptorValidationException: amber.hitec_proto.setAngleCommand: "amber.DriverMsg" does not declare      70 as an extension number.
+    Descriptors$DescriptorValidationException: amber.hitec_proto.setAngleCommand: "amber.DriverMsg" does not declare     70 as an extension number.
     at com.google.protobuf.Descriptors$FieldDescriptor.crossLink(Descriptors.java:974)
 * maestro driver was implemented with protobufs 2.5.0, amber is developed with protobufs 2.4.1, it means than if we want to use amber driver with maestro we have to update protobufs to 2.5.0 and rebuild project by server and client side.
 
