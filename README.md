@@ -172,3 +172,24 @@ Example code:
     });
     
     client.terminate();
+    
+Maestro Pololu 
+--------------
+
+In HitecProxy client:
+
+* angles can be passed as simple integer in within 0 and 180.
+* address is just port number of servo in maestro pololu.
+
+Example code:
+
+AmberClient client = new AmberClient("192.168.1.50", 26233);
+    HitecProxy hitecProxy = new HitecProxy(client, 0);
+    
+    for (int i = 0; i <= 180; i+=10) {
+        hitecProxy.setAngle(0,i);
+        
+        Thread.sleep(50);
+    }
+    
+    client.terminate();
