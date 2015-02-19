@@ -175,6 +175,16 @@ Example code:
     
 Maestro Pololu 
 --------------
+Important notes(Tips and tricks):
+
+* if there is only maestro connected via usb to pandaboard, we should leave "uart_port = /dev/ttyACM0" as it should linux probably will automatically wire maestro to that port. If we have more devices connected to panda, we have to check if this port wasn't wired to ACM1 - in that case we have to change this config value to /dev/ttyACM1.
+* maven will build client project only if there is protoc executive path somewhere in the environment variables.
+* jar files (client libraries) can not be mixed in terms of compilation date. We can not take amber-java-common.jar from different build than amber-java-maestro.jar is builded. It can cause following error:
+    Caused by: com.google.protobuf.
+    Descriptors$DescriptorValidationException: amber.hitec_proto.setAngleCommand: "amber.DriverMsg" does not declare      70 as an extension number.
+    at com.google.protobuf.Descriptors$FieldDescriptor.crossLink(Descriptors.java:974)
+* maestro driver was implemented with protobufs 2.5.0, amber is developed with protobufs 2.4.1, it means than if we want to use amber driver with maestro we have to update protobufs to 2.5.0 and rebuild project by server and client side.
+
 
 In HitecProxy client:
 
