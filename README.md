@@ -190,6 +190,7 @@ In HitecProxy client:
 
 * angles can be passed as simple integer in within 0 and 180.
 * address is just port number of servo in maestro pololu.
+* speed for setSpeed command is integer in within 0 and 255.
 
 Example code:
 
