@@ -49,6 +49,17 @@
             <artifactId>amber-java-roboclaw</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
+        <dependency>
+            <groupId>pl.edu.agh.amber.pidfollowtrajectory</groupId>
+            <artifactId>amber-java-pid-follow-trajectory</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-csv</artifactId>
+            <version>1.1</version>
+        </dependency>
     </dependencies>
 
     <build>

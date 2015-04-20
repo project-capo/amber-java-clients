@@ -25,6 +25,7 @@
         <module>amber-java-maestro</module>
         <module>amber-java-ninedof</module>
         <module>amber-java-roboclaw</module>
+        <module>amber-java-pid-follow-trajectory</module>
     </modules>
 
     <build>
