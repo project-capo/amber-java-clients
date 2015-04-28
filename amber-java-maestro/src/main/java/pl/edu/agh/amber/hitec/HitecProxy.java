@@ -9,6 +9,7 @@ import pl.edu.agh.amber.hitec.proto.HitecProto;
 import pl.edu.agh.amber.hitec.proto.HitecProto.SetAngle;
 import pl.edu.agh.amber.hitec.proto.HitecProto.SetDifferentAngles;
 import pl.edu.agh.amber.hitec.proto.HitecProto.SetSameAngle;
+import pl.edu.agh.amber.hitec.proto.HitecProto.SetSpeed;
 
 import java.io.IOException;
 import java.util.logging.Logger;
@@ -20,7 +21,7 @@ import java.util.logging.Logger;
  */
 public class HitecProxy extends AmberProxy {
 
-    private final static int DEVICE_TYPE = 6;
+    private final static int DEVICE_TYPE = 7;
 
     private final ExtensionRegistry extensionRegistry;
 
@@ -52,6 +53,18 @@ public class HitecProxy extends AmberProxy {
         DriverMsg.Builder driverMsgBuilder = DriverMsg.newBuilder();
         driverMsgBuilder.setType(DriverMsg.MsgType.DATA);
         driverMsgBuilder.setExtension(HitecProto.setAngleCommand, commandBuilder.build());
+
+        sendMesssage(driverMsgBuilder.build());
+    }
+    public void setSpeed(int address, int speed) {
+        SetSpeed.Builder commandBuilder = SetSpeed.newBuilder();
+
+        commandBuilder.setServoAddress(address);
+        commandBuilder.setSpeed(speed);
+
+        DriverMsg.Builder driverMsgBuilder = DriverMsg.newBuilder();
+        driverMsgBuilder.setType(DriverMsg.MsgType.DATA);
+        driverMsgBuilder.setExtension(HitecProto.setSpeedCommand, commandBuilder.build());
 
         sendMesssage(driverMsgBuilder.build());
     }
