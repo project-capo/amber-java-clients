@@ -7,6 +7,9 @@
 
 bin/
 target/
+classes/
+maven*/
+protoc*/
 tmp/
 
 *~
