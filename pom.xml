@@ -92,6 +92,11 @@
             <id>dtrott</id>
             <url>http://maven.davidtrott.com/repository</url>
         </pluginRepository>
+
+        <pluginRepository>
+            <id>protoc-plugin</id>
+            <url>https://dl.bintray.com/sergei-ivanov/maven/</url>
+        </pluginRepository>
     </pluginRepositories>
 
 </project>
