@@ -35,28 +35,6 @@
     <build>
         <plugins>
             <plugin>
-                <groupId>com.google.protobuf.tools</groupId>
-                <artifactId>maven-protoc-plugin</artifactId>
-                <version>0.4.4</version>
-                <configuration>
-                    <protocExecutable>protoc</protocExecutable>
-                    <protoSourceRoot>
-                        ${project.basedir}/src/main/resources/
-                    </protoSourceRoot>
-                    <outputDirectory>
-                        ${project.basedir}/target/generated-sources/java
-                    </outputDirectory>
-                </configuration>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>compile</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-
-            <plugin>
                 <artifactId>maven-assembly-plugin</artifactId>
                 <executions>
                     <execution>
@@ -83,6 +61,22 @@
                         <goals>
                             <goal>jar</goal>
                         </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <version>1.8</version>
+                <executions>
+                    <execution>
+                        <phase>generate-sources</phase>
+                        <goals><goal>add-source</goal></goals>
+                        <configuration>
+                            <sources>
+                                <source>src/generated-sources/java</source>
+                            </sources>
+                        </configuration>
                     </execution>
                 </executions>
             </plugin>

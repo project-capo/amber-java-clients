@@ -27,6 +27,7 @@ How to deploy
 -------------
 
 * Clone this project.
+* Execute `protoc.sh` script to generate classes for Protobuf.
 * `mvn install` inside project.
 * Import project to your favorite IDE.
 
@@ -41,54 +42,15 @@ Simply. Add following lines to your projects `pom.xml`:
 
     <repositories>
         <repository>
-            <id>amber-java-clients-mvn-repo</id>
-            <url>https://github.com/project-capo/amber-java-clients/raw/mvn-repo</url>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
         </repository>
     </repositories>
 
 Next, add following selected dependencies:
 
     <dependencies>
-        <dependency>
-            <groupId>pl.edu.agh.amber.common</groupId>
-            <artifactId>amber-java-common</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>pl.edu.agh.amber.drivetopoint</groupId>
-            <artifactId>amber-java-drive-to-point</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>pl.edu.agh.amber.hokuyo</groupId>
-            <artifactId>amber-java-hokuyo</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>pl.edu.agh.amber.hokuyo-scanner</groupId>
-            <artifactId>amber-java-hokuyo-scanner</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>pl.edu.agh.amber.location</groupId>
-            <artifactId>amber-java-location</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>pl.edu.agh.amber.maestro</groupId>
-            <artifactId>amber-java-maestro</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>pl.edu.agh.amber.ninedof</groupId>
-            <artifactId>amber-java-ninedof</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>pl.edu.agh.amber.roboclaw</groupId>
-            <artifactId>amber-java-roboclaw</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
+        <!-- not yet published -->
     </dependencies>
 
 How to use (jar)

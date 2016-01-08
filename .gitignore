@@ -6,10 +6,8 @@
 *.ear
 
 bin/
+generated-sources/
 target/
-classes/
-maven*/
-protoc*/
 tmp/
 
 *~
