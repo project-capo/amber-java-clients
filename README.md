@@ -50,7 +50,9 @@ Simply. Add following lines to your projects `pom.xml`:
 Next, add following selected dependencies:
 
     <dependencies>
-        <!-- not yet published -->
+        <groupId>com.github.project-capo</groupId>
+        <artifactId>amber-java-clients</artifactId>
+        <version>0.7</version>
     </dependencies>
 
 How to use (jar)
