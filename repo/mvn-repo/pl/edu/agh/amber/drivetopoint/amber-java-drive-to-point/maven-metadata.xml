@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+  <groupId>pl.edu.agh.amber.drivetopoint</groupId>
+  <artifactId>amber-java-drive-to-point</artifactId>
+  <versioning>
+    <versions>
+      <version>1.0-SNAPSHOT</version>
+    </versions>
+    <lastUpdated>20160306214811</lastUpdated>
+  </versioning>
+</metadata>
