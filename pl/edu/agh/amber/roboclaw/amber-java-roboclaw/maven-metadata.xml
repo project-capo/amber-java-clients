@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+  <groupId>pl.edu.agh.amber.roboclaw</groupId>
+  <artifactId>amber-java-roboclaw</artifactId>
+  <versioning>
+    <versions>
+      <version>1.0-SNAPSHOT</version>
+    </versions>
+    <lastUpdated>20160306214813</lastUpdated>
+  </versioning>
+</metadata>
