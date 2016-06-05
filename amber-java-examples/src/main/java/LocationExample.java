@@ -58,8 +58,7 @@ public class LocationExample {
 
 	/* Example upload JSON map to robot 
 	String tempMapJSON = readMapFromFile("<FileName.roson>");			
-	locationProxy.UploadMap(tempMapJSON);
-	 */
+	locationProxy.UploadMap(tempMapJSON);*/
 	private String readMapFromFile(String sPath) throws IOException
 	{
 		byte[] encoded = Files.readAllBytes(Paths.get(sPath));			
