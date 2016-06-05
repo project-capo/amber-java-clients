@@ -23,4 +23,11 @@ public class Scan extends FutureObject {
         }
         return points;
     }
+    
+    public List<MapPoint> getPoints(long timeout) throws Exception {
+        if (!isAvailable()) {
+            waitAvailable(timeout);
+        }
+        return points;
+    }
 }
