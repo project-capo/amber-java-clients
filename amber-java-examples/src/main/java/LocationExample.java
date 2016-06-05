@@ -43,7 +43,7 @@ public class LocationExample {
 			LocationCurrent lok = locationProxy.getCurrentLocation();
 			lok.waitAvailable();
 
-			System.out.println(String.format("Current location: X: %e, Y: %e, Alfa: %e, P: %e, TimeStamp: %e",
+			System.out.println(String.format("Current location: X: %e, Y: %e, Alfa: %e, P: %e, TimeStamp: %d",
 					lok.getX(), lok.getY(), lok.getAngle(),
 					lok.getP(), lok.getTimeStamp()));
 
