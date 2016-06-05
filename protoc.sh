@@ -8,7 +8,9 @@ set -x
 
 pushd ${script_directory}
   mkdir -p amber-java-common/src/generated-sources/java
-  protoc amber-java-common/src/main/resources/drivermsg.proto --java_out=amber-java-common/src/generated-sources/java
+  cd ./amber-java-common/src/main/resources
+  protoc drivermsg.proto --java_out=./../../../../amber-java-common/src/generated-sources/java
+  cd ./../../../../
 
   for submodule in $(ls | grep amber-java | grep -v common | grep -v iml); do
     mkdir -p ${submodule}/src/generated-sources/java
